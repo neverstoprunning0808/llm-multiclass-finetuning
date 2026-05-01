@@ -1,0 +1,35 @@
+data:
+  dataset_name: yelp_review_full
+  train_size: 5000
+  eval_size: 5000
+  seed: 42
+  output_path: data/restaurant_ds
+
+tokenizer:
+  data_path: data/restaurant_ds
+  model_checkpoint: distilbert-base-uncased
+  padding: max_length
+  truncation: true
+  max_length: 128
+  batch_size: 128
+  output_path: data/tokenized_ds
+  tokenizer_saved_path: results/final_tokenizer
+
+train:
+  model_checkpoint: distilbert-base-uncased
+  num_labels: 5
+  data_path: data/tokenized_ds
+  output_dir: results
+  eval_strategy: epoch
+  save_strategy: epoch
+  learning_rate: 2e-5
+  per_device_train_batch_size: 128
+  per_device_eval_batch_size: 128
+  num_train_epochs: 3
+  weight_decay: 0.01
+  logging_dir: logs
+  logging_steps: 10
+  save_steps: 500
+  load_best_model_at_end: True
+  model_saved_path: results/final_model
+  metrics_saved_path: results/metrics

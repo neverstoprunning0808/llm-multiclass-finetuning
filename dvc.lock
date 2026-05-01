@@ -1,0 +1,101 @@
+schema: '2.0'
+stages:
+  prepare_data:
+    cmd: python src/prepare_data.py
+    deps:
+    - path: src/config.py
+      hash: md5
+      md5: 62fc54093bb34698d7744464f8140b89
+      size: 1886
+    - path: src/prepare_data.py
+      hash: md5
+      md5: 07fbaef796fc32501824fb21a6790198
+      size: 1090
+    params:
+      params.yaml:
+        data:
+          dataset_name: yelp_review_full
+          train_size: 5000
+          eval_size: 5000
+          seed: 42
+          output_path: data/restaurant_ds
+    outs:
+    - path: data/restaurant_ds
+      hash: md5
+      md5: 17bbc720de04a11a408fc36e025f6cf6.dir
+      size: 11542197
+      nfiles: 7
+  tokenizer:
+    cmd: python src/tokenizer.py
+    deps:
+    - path: src/config.py
+      hash: md5
+      md5: 62fc54093bb34698d7744464f8140b89
+      size: 1886
+    - path: src/prepare_data.py
+      hash: md5
+      md5: 07fbaef796fc32501824fb21a6790198
+      size: 1090
+    - path: src/tokenizer.py
+      hash: md5
+      md5: 5cabadd8dc41bcd291434824545110d8
+      size: 988
+    params:
+      params.yaml:
+        tokenizer:
+          data_path: data/restaurant_ds
+          model_checkpoint: distilbert-base-uncased
+          padding: max_length
+          truncation: true
+          max_length: 128
+          batch_size: 128
+          output_path: data/tokenized_ds
+          tokenizer_saved_path: results/final_tokenizer
+    outs:
+    - path: data/tokenized_ds
+      hash: md5
+      md5: 330081044c54d57d111330246f5dd420.dir
+      size: 19347215
+      nfiles: 7
+    - path: results/final_tokenizer
+      hash: md5
+      md5: 47db1276997c1109233a2eddf2e0beca.dir
+      size: 712012
+      nfiles: 2
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/tokenized_ds
+      hash: md5
+      md5: 330081044c54d57d111330246f5dd420.dir
+      size: 19347215
+      nfiles: 7
+    - path: src/config.py
+      hash: md5
+      md5: 62fc54093bb34698d7744464f8140b89
+      size: 1886
+    - path: src/train.py
+      hash: md5
+      md5: 1b288fe9f95419449883f179a976afe7
+      size: 1919
+    params:
+      params.yaml:
+        tokenizer:
+          data_path: data/restaurant_ds
+          model_checkpoint: distilbert-base-uncased
+          padding: max_length
+          truncation: true
+          max_length: 128
+          batch_size: 128
+          output_path: data/tokenized_ds
+          tokenizer_saved_path: results/final_tokenizer
+    outs:
+    - path: results/final_model
+      hash: md5
+      md5: 4b44756a40b3e8448d39ad538743b773.dir
+      size: 267842689
+      nfiles: 2
+    - path: results/metrics/metrics.json
+      hash: md5
+      md5: 44aee2439a6dde8143da065d645f594b
+      size: 140
