@@ -22,10 +22,10 @@ train:
   output_dir: results
   eval_strategy: epoch
   save_strategy: epoch
-  learning_rate: 2e-5
+  learning_rate: 3e-5
   per_device_train_batch_size: 128
   per_device_eval_batch_size: 128
-  num_train_epochs: 3
+  num_train_epochs: 4
   weight_decay: 0.01
   logging_dir: logs
   logging_steps: 10

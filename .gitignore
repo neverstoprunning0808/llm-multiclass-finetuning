@@ -1,0 +1,7 @@
+results/
+
+__pycache__/
+.mypy_cache/
+src/__pycache__/
+**/__pycache__/
+*.pyc

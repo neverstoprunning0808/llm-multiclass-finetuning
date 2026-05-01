@@ -80,22 +80,31 @@ stages:
       size: 1919
     params:
       params.yaml:
-        tokenizer:
-          data_path: data/restaurant_ds
+        train:
           model_checkpoint: distilbert-base-uncased
-          padding: max_length
-          truncation: true
-          max_length: 128
-          batch_size: 128
-          output_path: data/tokenized_ds
-          tokenizer_saved_path: results/final_tokenizer
+          num_labels: 5
+          data_path: data/tokenized_ds
+          output_dir: results
+          eval_strategy: epoch
+          save_strategy: epoch
+          learning_rate: 3e-05
+          per_device_train_batch_size: 128
+          per_device_eval_batch_size: 128
+          num_train_epochs: 4
+          weight_decay: 0.01
+          logging_dir: logs
+          logging_steps: 10
+          save_steps: 500
+          load_best_model_at_end: true
+          model_saved_path: results/final_model
+          metrics_saved_path: results/metrics
     outs:
     - path: results/final_model
       hash: md5
-      md5: 4b44756a40b3e8448d39ad538743b773.dir
+      md5: 2d34476dcc6f43050f28bb8aaa096e2d.dir
       size: 267842689
       nfiles: 2
     - path: results/metrics/metrics.json
       hash: md5
-      md5: 44aee2439a6dde8143da065d645f594b
+      md5: 8e773fd50fdb57d21598fdd1a7274ed0
       size: 140

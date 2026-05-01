@@ -28,7 +28,7 @@ stages:
       - src/config.py
       - data/tokenized_ds
     params:
-      - tokenizer
+      - train
     outs:
       - results/final_model
     metrics:
