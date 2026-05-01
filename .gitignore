@@ -3,5 +3,6 @@ results/
 __pycache__/
 .mypy_cache/
 src/__pycache__/
+src/test.ipynb
 **/__pycache__/
 *.pyc

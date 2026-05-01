@@ -31,7 +31,6 @@ def train(config: AppConfig):
         per_device_eval_batch_size=config.train.per_device_eval_batch_size,
         num_train_epochs=config.train.num_train_epochs,
         weight_decay=config.train.weight_decay,
-        logging_dir=config.train.logging_dir,
         logging_steps=config.train.logging_steps,
         save_steps=config.train.save_steps,
         load_best_model_at_end=config.train.load_best_model_at_end,

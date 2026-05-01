@@ -70,14 +70,19 @@ stages:
       md5: 330081044c54d57d111330246f5dd420.dir
       size: 19347215
       nfiles: 7
+    - path: results/final_tokenizer
+      hash: md5
+      md5: 47db1276997c1109233a2eddf2e0beca.dir
+      size: 712012
+      nfiles: 2
     - path: src/config.py
       hash: md5
       md5: 62fc54093bb34698d7744464f8140b89
       size: 1886
     - path: src/train.py
       hash: md5
-      md5: 1b288fe9f95419449883f179a976afe7
-      size: 1919
+      md5: 932f6636fc43a188873f449f10859dc0
+      size: 1873
     params:
       params.yaml:
         train:
@@ -101,10 +106,27 @@ stages:
     outs:
     - path: results/final_model
       hash: md5
-      md5: 2d34476dcc6f43050f28bb8aaa096e2d.dir
+      md5: 22e2b5c9c61dccf6b29c102d83cfa0e2.dir
       size: 267842689
       nfiles: 2
     - path: results/metrics/metrics.json
       hash: md5
-      md5: 8e773fd50fdb57d21598fdd1a7274ed0
+      md5: 6c169f6553c9870be9873b921d19baab
       size: 140
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: results/final_model
+      hash: md5
+      md5: 22e2b5c9c61dccf6b29c102d83cfa0e2.dir
+      size: 267842689
+      nfiles: 2
+    - path: results/final_tokenizer
+      hash: md5
+      md5: 47db1276997c1109233a2eddf2e0beca.dir
+      size: 712012
+      nfiles: 2
+    - path: src/evaluate.py
+      hash: md5
+      md5: 0a7b9000b76daf4952e0460cb40c3b7a
+      size: 1515

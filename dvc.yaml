@@ -27,9 +27,18 @@ stages:
       - src/train.py
       - src/config.py
       - data/tokenized_ds
+      - results/final_tokenizer
     params:
       - train
     outs:
       - results/final_model
     metrics:
       - results/metrics/metrics.json
+  
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - results/final_tokenizer
+      - results/final_model
+
