@@ -41,4 +41,5 @@ stages:
       - src/evaluate.py
       - results/final_tokenizer
       - results/final_model
-
+    metrics:
+      - results/metrics.json

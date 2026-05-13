@@ -1,4 +1,6 @@
 results/
+.gradio/
+gradio/
 
 __pycache__/
 .mypy_cache/

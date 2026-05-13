@@ -9,21 +9,21 @@ stages:
       size: 1886
     - path: src/prepare_data.py
       hash: md5
-      md5: 07fbaef796fc32501824fb21a6790198
-      size: 1090
+      md5: 7d54da4e6b38165eda359200d779974e
+      size: 1786
     params:
       params.yaml:
         data:
           dataset_name: yelp_review_full
-          train_size: 5000
+          train_size: 30000
           eval_size: 5000
           seed: 42
           output_path: data/restaurant_ds
     outs:
     - path: data/restaurant_ds
       hash: md5
-      md5: 17bbc720de04a11a408fc36e025f6cf6.dir
-      size: 11542197
+      md5: ad171df114b2fd4b019eddade129c02e.dir
+      size: 8347877
       nfiles: 7
   tokenizer:
     cmd: python src/tokenizer.py
@@ -34,8 +34,8 @@ stages:
       size: 1886
     - path: src/prepare_data.py
       hash: md5
-      md5: 07fbaef796fc32501824fb21a6790198
-      size: 1090
+      md5: 7d54da4e6b38165eda359200d779974e
+      size: 1786
     - path: src/tokenizer.py
       hash: md5
       md5: 5cabadd8dc41bcd291434824545110d8
@@ -47,19 +47,19 @@ stages:
           model_checkpoint: distilbert-base-uncased
           padding: max_length
           truncation: true
-          max_length: 128
+          max_length: 512
           batch_size: 128
           output_path: data/tokenized_ds
           tokenizer_saved_path: results/final_tokenizer
     outs:
     - path: data/tokenized_ds
       hash: md5
-      md5: 330081044c54d57d111330246f5dd420.dir
-      size: 19347215
+      md5: a9e8085b01727d9a158bbd0313a340c3.dir
+      size: 84328831
       nfiles: 7
     - path: results/final_tokenizer
       hash: md5
-      md5: 47db1276997c1109233a2eddf2e0beca.dir
+      md5: b6749e34b2a8bcbeec41b79a5ea0c3fb.dir
       size: 712012
       nfiles: 2
   train:
@@ -67,12 +67,12 @@ stages:
     deps:
     - path: data/tokenized_ds
       hash: md5
-      md5: 330081044c54d57d111330246f5dd420.dir
-      size: 19347215
+      md5: a9e8085b01727d9a158bbd0313a340c3.dir
+      size: 84328831
       nfiles: 7
     - path: results/final_tokenizer
       hash: md5
-      md5: 47db1276997c1109233a2eddf2e0beca.dir
+      md5: b6749e34b2a8bcbeec41b79a5ea0c3fb.dir
       size: 712012
       nfiles: 2
     - path: src/config.py
@@ -92,10 +92,10 @@ stages:
           output_dir: results
           eval_strategy: epoch
           save_strategy: epoch
-          learning_rate: 3e-05
-          per_device_train_batch_size: 128
-          per_device_eval_batch_size: 128
-          num_train_epochs: 4
+          learning_rate: 0.0001
+          per_device_train_batch_size: 32
+          per_device_eval_batch_size: 32
+          num_train_epochs: 5
           weight_decay: 0.01
           logging_dir: logs
           logging_steps: 10
@@ -106,27 +106,32 @@ stages:
     outs:
     - path: results/final_model
       hash: md5
-      md5: 22e2b5c9c61dccf6b29c102d83cfa0e2.dir
+      md5: 8df102da1e4b5bee9a311beca6f43275.dir
       size: 267842689
       nfiles: 2
     - path: results/metrics/metrics.json
       hash: md5
-      md5: 6c169f6553c9870be9873b921d19baab
-      size: 140
+      md5: 67bf0f7ea4a2ed585275f33260cc34c6
+      size: 138
   evaluate:
     cmd: python src/evaluate.py
     deps:
     - path: results/final_model
       hash: md5
-      md5: 22e2b5c9c61dccf6b29c102d83cfa0e2.dir
+      md5: 8df102da1e4b5bee9a311beca6f43275.dir
       size: 267842689
       nfiles: 2
     - path: results/final_tokenizer
       hash: md5
-      md5: 47db1276997c1109233a2eddf2e0beca.dir
+      md5: b6749e34b2a8bcbeec41b79a5ea0c3fb.dir
       size: 712012
       nfiles: 2
     - path: src/evaluate.py
       hash: md5
-      md5: 0a7b9000b76daf4952e0460cb40c3b7a
-      size: 1515
+      md5: bd4b16072d4bdcdaf2b6c56715b03c6f
+      size: 2520
+    outs:
+    - path: results/metrics.json
+      hash: md5
+      md5: f46ab386595c05af22f727f9f36af1b8
+      size: 38
