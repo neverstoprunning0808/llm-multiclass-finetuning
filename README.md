@@ -128,6 +128,8 @@ source venv/bin/activate
 
 ```bash
 pip install -r requirements.txt
+git init 
+dvc init 
 ```
 
 ---
@@ -137,7 +139,7 @@ pip install -r requirements.txt
 The pipeline has 4 sequential stages defined in `dvc.yaml`:
 
 ```
-prepare_data  →  tokenize_data  →  train
+prepare_data  →  tokenize_data  →  train   →   evaluate
 ```
 
 ### Run the full pipeline
@@ -150,7 +152,7 @@ dvc repro
 
 ```bash
 dvc repro prepare_data
-dvc repro tokenize_data
+dvc repro tokenizer
 dvc repro train
 dvc repro evaluate
 ```
