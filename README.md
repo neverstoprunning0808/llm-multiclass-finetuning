@@ -15,6 +15,30 @@ https://vinh0808-restaurant-review-rating-prediction.hf.space/)
 
 Enter a restaurant review in the text box and the model will predict the sentiment rating (1–5 stars) with confidence scores.
 
+### Restaurant Sample Reviews
+
+#### 1 Star ⭐
+> “Terrible experience. The food arrived cold, the server forgot half our order, and we waited almost an hour for the main dishes. Definitely not worth the price.”
+
+---
+
+#### 2 Stars ⭐⭐
+> “The restaurant looked nice, but the food was only average. Service was slow and the portions were smaller than expected. Probably wouldn’t come back.”
+
+---
+
+#### 3 Stars ⭐⭐⭐
+> “Decent place overall. The food tasted good and the atmosphere was pleasant, though nothing really stood out. A solid option if you’re nearby.”
+
+---
+
+#### 4 Stars ⭐⭐⭐⭐
+> “Really enjoyable dining experience. The staff were friendly, the dishes were flavorful, and the restaurant had a cozy atmosphere. I’d happily visit again.”
+
+---
+
+#### 5 Stars ⭐⭐⭐⭐⭐
+> “Absolutely amazing! Every dish was fresh and delicious, the service was outstanding, and the ambiance was perfect. One of the best restaurant experiences I’ve had.”
 ---
 
 ## Overview
