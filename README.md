@@ -1,6 +1,7 @@
 # 🍽️ Restaurant Review Sentiment Classification
 
 Fine-tuned **DistilBERT** for 5-class sentiment classification on restaurant reviews, with a full **DVC pipeline** for reproducibility and a **Gradio** demo for inference.
+
 ---
 
 ## Gradio Demo
@@ -13,8 +14,6 @@ https://vinh0808-restaurant-review-rating-prediction.hf.space/)
 ### Usage
 
 Enter a restaurant review in the text box and the model will predict the sentiment rating (1–5 stars) with confidence scores.
-
----
 
 ---
 
