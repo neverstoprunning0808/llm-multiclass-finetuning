@@ -81,8 +81,8 @@ stages:
       size: 1886
     - path: src/train.py
       hash: md5
-      md5: 932f6636fc43a188873f449f10859dc0
-      size: 1873
+      md5: 4962873911f9b3ca45b4cab0d8819ce2
+      size: 2028
     params:
       params.yaml:
         train:
@@ -95,10 +95,10 @@ stages:
           learning_rate: 0.0001
           per_device_train_batch_size: 32
           per_device_eval_batch_size: 32
-          num_train_epochs: 5
+          num_train_epochs: 11
           weight_decay: 0.01
           logging_dir: logs
-          logging_steps: 10
+          logging_steps: 11
           save_steps: 500
           load_best_model_at_end: true
           model_saved_path: results/final_model
@@ -106,19 +106,19 @@ stages:
     outs:
     - path: results/final_model
       hash: md5
-      md5: 8df102da1e4b5bee9a311beca6f43275.dir
+      md5: 77b9cb7af9667ddd45c1f79e94dcb996.dir
       size: 267842689
       nfiles: 2
     - path: results/metrics/metrics.json
       hash: md5
-      md5: 67bf0f7ea4a2ed585275f33260cc34c6
-      size: 138
+      md5: a97a45c7d480a5b0513c4ea2952d6a13
+      size: 139
   evaluate:
     cmd: python src/evaluate.py
     deps:
     - path: results/final_model
       hash: md5
-      md5: 8df102da1e4b5bee9a311beca6f43275.dir
+      md5: 77b9cb7af9667ddd45c1f79e94dcb996.dir
       size: 267842689
       nfiles: 2
     - path: results/final_tokenizer
@@ -128,10 +128,10 @@ stages:
       nfiles: 2
     - path: src/evaluate.py
       hash: md5
-      md5: bd4b16072d4bdcdaf2b6c56715b03c6f
-      size: 2520
+      md5: 0751f54be0a98832b0d74bfb9e162a1f
+      size: 2587
     outs:
     - path: results/metrics.json
       hash: md5
-      md5: f46ab386595c05af22f727f9f36af1b8
+      md5: 56996dac2dab82a5c7944645e171dada
       size: 38

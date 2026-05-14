@@ -35,6 +35,9 @@ def train(config: AppConfig):
         save_steps=config.train.save_steps,
         load_best_model_at_end=config.train.load_best_model_at_end,
         report_to="tensorboard",
+        save_total_limit=3,
+        greater_is_better = False,
+        metric_for_best_model="eval_loss"
     )
 
     trainer = Trainer(
@@ -44,7 +47,9 @@ def train(config: AppConfig):
         eval_dataset=tokenized_dataset["val"],
     )
 
-    trainer.train()
+    trainer.train(resume_from_checkpoint=True)
+    # trainer.train()
+
 
     model.save_pretrained(config.train.model_saved_path)
 

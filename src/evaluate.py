@@ -42,7 +42,7 @@ def evaluate(config: AppConfig) -> None:
     # input_ids = torch.tensor(eval_tokenized['input_ids'][:]).to(device)
     # attention_mask = torch.tensor(eval_tokenized['attention_mask'][:]).to(device)
     
-    eval_dl = DataLoader(eval_tokenized, batch_size=64)
+    eval_dl = DataLoader(eval_tokenized, batch_size=32)
 
     new_model = AutoModelForSequenceClassification.from_pretrained(
         config.train.model_saved_path
